@@ -17,15 +17,24 @@ class ProdutosPage {
   }
 
   visitarProduto(nomeProduto) {
-    // cy.visit(`produtos/${nomeProduto}`)
-    const urlFormatada = nomeProduto.replace(/ /g, '-')
-    cy.visit(`produtos/${urlFormatada}`)
+     cy.visit(`produtos/${nomeProduto}`)
+    // const urlFormatada = nomeProduto.replace(/ /g, '-')
+    // cy.visit(`produtos/${urlFormatada}`)
 
 
   }
 
-  addProdutoCarrinho() {
+  // Nesse ponto, o teste não estava passando, 
+  // pois não estava conseguindo clicar corretamente. 
+  // Acho que estava passando muito rápido ele estava se perdendo ou algo assim.
+  // Após adicionar o wait, funcionou.
 
+  addProdutoCarrinho(tamanho, cor, quantidade) {
+    cy.wait(100)
+    cy.get('.button-variable-item-' + tamanho).click()
+    cy.get('.button-variable-item-' + cor).click()
+    cy.get('.input-text').clear().type(quantidade)
+    cy.get('.single_add_to_cart_button').click()
   }
 }
 

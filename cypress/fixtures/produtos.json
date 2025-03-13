@@ -3,7 +3,7 @@
         "nomeProduto": "Abominable Hoodie",
         "tamanho": "XS",
         "cor": "Blue",
-        "quantidade":3
+        "qtd":3
     },
 
 
@@ -11,14 +11,14 @@
         "nomeProduto": "Ingrid Running Jacket",
         "tamanho": "M",
         "cor": "Orange",
-        "quantidade":4
+        "qtd":4
     },
 
 
     {
         "nomeProduto": "Stellar Solar Jacket",
         "tamanho": "M",
-        "cor": "yellow",
-        "quantidade":2
+        "cor": "Yellow",
+        "qtd":2
     }
 ]

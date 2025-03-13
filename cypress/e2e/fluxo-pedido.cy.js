@@ -22,7 +22,7 @@ context('Exercício - Testes End-to-End - Fluxo de Pedido', () => {
   
     });
 
-    it.only('Deve buscar um produto com sucesso', () => {
+    it('Deve buscar um produto com sucesso', () => {
       let produto = 'Apollo Running Short'
       produtosPage.buscarProduto(produto)
       cy.get('.product_title').should('contain', produto)
@@ -31,10 +31,29 @@ context('Exercício - Testes End-to-End - Fluxo de Pedido', () => {
     });
 
     it('Deve visitar a pagina do produto', () => {
+      produtosPage.visitarProduto('Zeppelin-yoga-pant')
+      cy.get('.product_title').should('contain', 'Zeppelin Yoga Pant')
       
     });
 
     it('Deve adicionar produto ao carrinho', () => {
+      let qtd = 4
+      produtosPage.buscarProduto('Ingrid Running Jacket')
+      produtosPage.addProdutoCarrinho('M', 'Red', qtd)
+
+      cy.get('.woocommerce-message').should('contain', qtd + ' × “Ingrid Running Jacket” foram adicionados no seu carrinho.')
       
+    });
+
+    it('Deve adicionar produto ao carrinho buscando da massa de dados', () => {
+
+      cy.fixture('produtos').then(dados => {   
+        produtosPage.buscarProduto(dados[2].nomeProduto)
+        produtosPage.addProdutoCarrinho(
+          dados[2].tamanho,
+          dados[2].cor,
+          dados[2].qtd)
+        cy.get('.woocommerce-message').should('contain', dados[2].nomeProduto)
+      })
     });
   });
