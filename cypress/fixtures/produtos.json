@@ -1,0 +1,24 @@
+[
+    {
+        "nomeProduto": "Abominable Hoodie",
+        "tamanho": "XS",
+        "cor": "Blue",
+        "quantidade":3
+    },
+
+
+    {
+        "nomeProduto": "Ingrid Running Jacket",
+        "tamanho": "M",
+        "cor": "Orange",
+        "quantidade":4
+    },
+
+
+    {
+        "nomeProduto": "Stellar Solar Jacket",
+        "tamanho": "M",
+        "cor": "yellow",
+        "quantidade":2
+    }
+]
