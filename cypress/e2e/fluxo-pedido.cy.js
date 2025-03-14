@@ -3,15 +3,6 @@ import produtosPage from "../support/page_objects/produtos.page";
 import checkoutPage from "../support/page_objects/checkout.page";
 
 context('Exercício - Testes End-to-End - Fluxo de Pedido', () => {
-  /* Como cliente 
-    Quero acessar a Loja EBAC 
-    Para fazer um pedido de 4 produtos 
-    Fazendo a escolha dos produtos
-    Adicionando ao carrinho
-    Preenchendo todas opções no checkout
-    E validando minha compra ao final 
-  */
-
     beforeEach(() => {
       produtosPage.visitarUrl()
     });
