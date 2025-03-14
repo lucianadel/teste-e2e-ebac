@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import produtosPage from "../support/page_objects/produtos.page";
+import checkoutPage from "../support/page_objects/checkout.page";
 
 context('Exercício - Testes End-to-End - Fluxo de Pedido', () => {
   /* Como cliente 
@@ -18,8 +19,6 @@ context('Exercício - Testes End-to-End - Fluxo de Pedido', () => {
     it('Deve selecionar um produto da lista', () => {
       produtosPage.buscarProdutoLista('Aero Daily Fitness Tee')
       cy.get('.woocommerce-product-details__short-description > p').should('contain', 'This is a variable product called a Aero Daily Fitness Tee')
-      
-  
     });
 
     it('Deve buscar um produto com sucesso', () => {
@@ -45,15 +44,36 @@ context('Exercício - Testes End-to-End - Fluxo de Pedido', () => {
       
     });
 
-    it('Deve adicionar produto ao carrinho buscando da massa de dados', () => {
+    it('Deve adicionar produtos ao carrinho e finalizar a compra', () => {
 
       cy.fixture('produtos').then(dados => {   
-        produtosPage.buscarProduto(dados[2].nomeProduto)
+        produtosPage.buscarProduto(dados[1].nomeProduto)
         produtosPage.addProdutoCarrinho(
-          dados[2].tamanho,
-          dados[2].cor,
-          dados[2].qtd)
-        cy.get('.woocommerce-message').should('contain', dados[2].nomeProduto)
-      })
+          dados[1].tamanho,
+          dados[1].cor,
+          dados[1].qtd)
+          cy.get('.woocommerce-message').should('contain', dados[1].nomeProduto)
+        });
+        
+        checkoutPage.acessarCarrinho();
+        checkoutPage.concluirCompra();
+        
+        cy.fixture('dados-checkout').then(dadosCheckout => {
+          checkoutPage.preencherCheckout(
+            dadosCheckout[0].nome, 
+            dadosCheckout[0].sobrenome, 
+            dadosCheckout[0].empresa, 
+            dadosCheckout[0].pais, 
+            dadosCheckout[0].endereco, 
+            dadosCheckout[0].cidade, 
+            dadosCheckout[0].estado, 
+            dadosCheckout[0].cep, 
+            dadosCheckout[0].telefone, 
+            dadosCheckout[0].email
+          );
+        });
+
+        checkoutPage.finalizarCompra()
+        checkoutPage.conferirPedidoRecebidoComSucesso("Pedido recebido")
     });
-  });
+});    
